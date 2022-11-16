@@ -36,9 +36,6 @@ if __name__=="__main__":
     heartInfo = [110,111,124,115,116,112,110,118,110,118] 
     speedInfo = [25,26,23,24,23,27,26,25,23,23]  
     genderInfo = "male"
-
-    data1  = [{'Name':'Jhon','ID':2,'Add':'USA'},{'Name':'Joe','ID':3,'Add':'MX'},{'Name':'Tina','ID':4,'Add':'IND'}] 
-    data2  = [{'Name':'Jhon','ID':21,'Add':'USA'},{'Name':'Joes','ID':31,'Add':'MX'},{'Name':'Tina','ID':43,'Add':'IND'}] 
     
     #step 1 - create dF for given input
     userInputdf = spark.createDataFrame([(heartInfo,speedInfo,genderInfo)],["heartInfo","speedInfo","genderInfo"])
@@ -148,8 +145,9 @@ if __name__=="__main__":
         result = row['sport']+","+result
       result = result.strip(",")
       print("------------------------Final unique list of activities--------------------------------")
-
+      print('\n\n')
       print(result)
+      print('\n\n')
       
       
       #store this info in cache table
