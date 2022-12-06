@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head
+  <body>
+    <style>
+        body {
+        background-image: url('https://web.sundropfuels.com/sdf_content/uploads/2022/05/Benefits-of-Exercise.png');
+        background-repeat:repeat-x;padding:250px;"
+        color: #FFFFFF;
+            }
+    </style>
+    <br><br>
+  <center>
+      <h1>Activity Recommender</h1>
+      <h3>
+      Provide HeartRate and Speed Details
+      </h3>
+ 
+      
+      <form name = "activityInfo" id='actionReco' action = "." method = "post" ></form>
+      <h3>Name:</h3>
+      <input type="text" name="firstName"><br>
+      <h3>Gender</h3>
+        <div class="gender">
+          <input type="radio" id="male" name="gender" value="male">
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female">Female</label><br>
+        </div>
+      <h3>Heartrate Values</h3>
+      <label for="Heartrate">Heartrate1:</label>
+      <input type="text" id="Heartrate1" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate2:</label>
+      <input type="text" id="Heartrate2" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate3:</label>
+      <input type="text" id="Heartrate3" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate4:</label>
+      <input type="text" id="Heartrate4" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate5:</label>
+      <input type="text" id="Heartrate5" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate6:</label>
+      <input type="text" id="Heartrate6" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate7:</label>
+      <input type="text" id="Heartrate7" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate8:</label>
+      <input type="text" id="Heartrate8" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate9:</label>
+      <input type="text" id="Heartrate9" name="Heartrate"><br><br>
+      <label for="Heartrate">Heartrate10:</label>
+      <input type="text" id="Heartrate10" name="Heartrate"><br><br>
+      <h3>Speed Values</h3>
+
+      <label for="Speed">Speed1:</label>
+      <input type="text" id="Speed1" name="Speed"><br><br>
+      <label for="Speed">Speed2:</label>
+      <input type="text" id="Speed2" name="Speed"><br><br>
+      <label for="Speed">Speed3:</label>
+      <input type="text" id="Speed3" name="Speed"><br><br>
+      <label for="Speed">Speed4:</label>
+      <input type="text" id="Speed4" name="Speed"><br><br>
+      <label for="Speed">Speed5:</label>
+      <input type="text" id="Speed5" name="Speed"><br><br>
+      <label for="Speed">Speed6:</label>
+      <input type="text" id="Speed6" name="Speed"><br><br>
+      <label for="Speed">Speed7:</label>
+      <input type="text" id="Speed7" name="Speed"><br><br>
+      <label for="Speed">Speed8:</label>
+      <input type="text" id="Speed8" name="Speed"><br><br>
+      <label for="Speed">Speed9:</label>
+      <input type="text" id="Speed9" name="Speed"><br><br>
+      <label for="Speed">Speed10:</label>
+      <input type="text" id="Speed10" name="Speed"><br><br>
+     
+      <button type="button" onclick="sendUserInfo()">Submit</button>
+    </form>
+  </center>
+
+    </body>
+    <script>
+        function sendUserInfo(){
+          let hrValues = [];
+          let spdValues = [];
+          const HeartrateValues = document.getElementsByName('Heartrate');
+          const SpeedValues = document.getElementsByName('Speed');
+          const genderList =  document.getElementsByName('gender');
+ 
+          let selectedGender = null
+          for(i = 0; i < genderList.length; i++) {
+          if(genderList[i].checked)
+            selectedGender = genderList[i].value;
+         }
+         
+          HeartrateValues.forEach(val => {
+              hrValues.push(parseInt(val.value))
+          })
+          SpeedValues.forEach(val => {
+            spdValues.push(parseInt(val.value))
+          }) 
+          let avgHrate = hrValues.reduce((a,b) => a+b, 0)/hrValues.length;
+          let avgSpeed = spdValues.reduce((c,d) => c+d, 0)/spdValues.length;
+          const result = {avgHrate,avgSpeed,selectedGender}
+          
+          console.log('Average Heart rate:', avgHrate);
+          console.log('Average Speed:', avgSpeed);
+          console.log('Gender:', selectedGender);
+          console.log(result)
+          
+          const s = JSON.stringify(result); // Stringify converts a JavaScript object or value to a JSON string
+             
+          const request =  new XMLHttpRequest()
+
+          //request.open('POST',`ProcessUserInfo/${JSON.stringify(result)}`)
+          request.open('POST',`ProcessUserInfo/${s}`)
+          request.send()
+            }
+
+    </script>
+   
+    </head>
+    </body>
+    </html>
+<!--
+    getElementByID is a method that returns the values whose id matches the string given in the method. And though we are not passing any value to the JavaScript function, it gets the value.
+    XMLHttpResponse(method/URL) is an AJAX object. It is used in sending data to the webserver. Create an XMLHttpResponse object and pass your value through it.
+    JSON.stringfy is a common JSON method. When passing data to a web server data has to string, and the .stringfy method helps us do that.
+-->

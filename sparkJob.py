@@ -14,8 +14,22 @@ from pyspark.sql.types import FloatType
 from pyspark.sql.functions import count
 import statistics
 
+from flask import Flask,render_template, request
+import json
+import subprocess
 
-if __name__=="__main__":
+app  = Flask(__name__)
+
+@app.route('/')
+def ui():
+    return render_template('UI.html')
+
+
+@app.route('/ProcessUserInfo/<string:userinfo>',methods = ['POST','GET'])
+def getValue(userinfo):
+    userinfo = json.loads(userinfo)
+    print(userinfo) 
+    
     # Create a SparkSession
     spark = SparkSession.builder\
             .master("local")\
@@ -26,40 +40,38 @@ if __name__=="__main__":
 
     
     print(spark.version)
-
+    global result
     #------------------------------user input-------------------------------
 
-    '''heartInfo = [120,121,124,125,126,122,120,128,120,128]
+    heartInfo,speedInfo,genderInfo = userinfo['avgHrate'], userinfo['avgSpeed'], userinfo['selectedGender']
+    
+    '''
+    heartInfo = [130,131,134,135,136,132,130,138,130,138]
     speedInfo = [20,20,21,24,23,25,26,21,23,21]
+    genderInfo = "male"
+    '''
+    '''heartInfo = [110,111,124,115,116,112,110,118,110,118] 
+    speedInfo = [25,26,23,24,23,27,26,25,23,23]  
     genderInfo = "male"'''
 
-    heartInfo = [110,111,124,115,116,112,110,118,110,118] 
-    speedInfo = [25,26,23,24,23,27,26,25,23,23]  
-    genderInfo = "male"
     
     #step 1 - create dF for given input
     userInputdf = spark.createDataFrame([(heartInfo,speedInfo,genderInfo)],["heartInfo","speedInfo","genderInfo"])
     print("------------------------User input received--------------------------")
     userInputdf.show()
-
-    #step 2 - find avg heartrate and speed for given input 
-
-    array_mean = udf(lambda x: float(statistics.mean(x)))
-    userInputdf = userInputdf.withColumn('AvgHeartRate', array_mean('heartInfo'))
-    userInputdf = userInputdf.withColumn('AvgSpeed', array_mean('speedInfo'))
-
-    #step 3 - find range for given avg 
-    userInputdf=userInputdf.withColumn("heart_rate_min", userInputdf.AvgHeartRate/10)
+    
+    #step 2 - find range for given avg 
+    userInputdf=userInputdf.withColumn("heart_rate_min", userInputdf.heartInfo/10)
     userInputdf=userInputdf.withColumn("heart_rate_min", userInputdf.heart_rate_min.cast('int'))
     userInputdf=userInputdf.withColumn("heart_rate_min", userInputdf.heart_rate_min*10)
     userInputdf=userInputdf.withColumn("heart_rate_max", userInputdf.heart_rate_min+10)
 
-    userInputdf=userInputdf.withColumn("speed_min", userInputdf.AvgSpeed/10)
+    userInputdf=userInputdf.withColumn("speed_min", userInputdf.speedInfo/10)
     userInputdf=userInputdf.withColumn("speed_min", userInputdf.speed_min.cast('int'))
     userInputdf=userInputdf.withColumn("speed_min", userInputdf.speed_min*10)
     userInputdf=userInputdf.withColumn("speed_max", userInputdf.speed_min+10)
 
-    print("------------------------Avg and range found--------------------------")
+    print("------------------------Range found--------------------------")
 
     userInputdf.show()
 
@@ -92,9 +104,17 @@ if __name__=="__main__":
     if cacheResult.count()>0:  #data available hence return to user 
       print("------------------------Requested data available in cache------------------------- ")
       cacheResult.show()
+      final_data = cacheResult.select('sport').distinct().collect()
+      
+      
+      result = ""
+      for row in final_data:
+        result = row['sport']+","+result
+      result = result.strip(",")
+      return result
     else:
       #no data available in cache - find in base table
-      print("------------------------Requested activity not avaialable--------------------------")
+      print("------------------------Requested activity not avaialable--------------------------\n")
       print("------------------------Proceeding to check Base mongo tables----------------------")
 
       heartRatebaseTableData = spark.read.format('com.mongodb.spark.sql.DefaultSource')\
@@ -144,23 +164,40 @@ if __name__=="__main__":
       for row in final_data:
         result = row['sport']+","+result
       result = result.strip(",")
-      print("------------------------Final unique list of activities--------------------------------")
-      print('\n\n')
-      print(result)
-      print('\n\n')
-      
-      
-      #store this info in cache table
-      df = spark.createDataFrame([(speed_min,speed_max,heart_rate_min,heart_rate_max,genderInfo,result)],
-                                 ["minSpeed","maxSpeed","minHeart","maxHeart","gender","sport"])
+      if result == "":
+        print('No result found for the given set of values in the dataset')
+        result =  'No result found for the given set of values in the dataset'
+        return result
+      else:
+        print("------------------------Final unique list of activities--------------------------------")
+        print('\n\n')
+        print(result)
+        print('\n\n')
+        
+        
+        #store this info in cache table
+        df = spark.createDataFrame([(speed_min,speed_max,heart_rate_min,heart_rate_max,genderInfo,result)],
+                                  ["minSpeed","maxSpeed","minHeart","maxHeart","gender","sport"])
 
-      print("------------------------Data stored in Cache table for future reference-----------------------")
+        print("------------------------Data stored in Cache table for future reference-----------------------")
 
-      df.show()
-      df.write\
-        .format('com.mongodb.spark.sql.DefaultSource')\
-        .mode('append')\
-        .option("uri","mongodb://localhost:27017/local.cacheRangeActivity") \
-        .save()
+        df.show()
+        df.write\
+          .format('com.mongodb.spark.sql.DefaultSource')\
+          .mode('append')\
+          .option("uri","mongodb://localhost:27017/local.cacheRangeActivity") \
+          .save()
+        
       
+      
+      return result
+
+@app.route('/result')
+def output():
+    return render_template('result.html', data=result)
+
+
+if __name__=="__main__":
+    app.run(debug=True)
+    
       
