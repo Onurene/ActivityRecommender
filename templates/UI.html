@@ -16,7 +16,7 @@
       Provide HeartRate and Speed Details
       </h3>
  
-      
+      <!--HTML form to receive user input-->
       <form name = "activityInfo" id='actionReco' action = "." method = "post" ></form>
       <h3>Name:</h3>
       <input type="text" name="firstName"><br>
@@ -71,12 +71,13 @@
       <label for="Speed">Speed10:</label>
       <input type="text" id="Speed10" name="Speed"><br><br>
      
-      <button type="button" onclick="sendUserInfo()">Submit</button>
+      <button type="button" onclick="sendUserInfo()">Submit</button> 
     </form>
   </center>
 
     </body>
     <script>
+        //function gets activated when the user clicks on submit button in the UI
         function sendUserInfo(){
           let hrValues = [];
           let spdValues = [];
@@ -85,6 +86,7 @@
           const genderList =  document.getElementsByName('gender');
  
           let selectedGender = null
+          //store input gender in selectedGender variable
           for(i = 0; i < genderList.length; i++) {
           if(genderList[i].checked)
             selectedGender = genderList[i].value;
@@ -96,8 +98,11 @@
           SpeedValues.forEach(val => {
             spdValues.push(parseInt(val.value))
           }) 
+          //find the average heartRate and speed entered by the user
           let avgHrate = hrValues.reduce((a,b) => a+b, 0)/hrValues.length;
           let avgSpeed = spdValues.reduce((c,d) => c+d, 0)/spdValues.length;
+
+          //prepare a variable result to send the info to the backend flask app
           const result = {avgHrate,avgSpeed,selectedGender}
           
           console.log('Average Heart rate:', avgHrate);
@@ -105,22 +110,16 @@
           console.log('Gender:', selectedGender);
           console.log(result)
           
-          const s = JSON.stringify(result); // Stringify converts a JavaScript object or value to a JSON string
-             
+          // Stringify converts a JavaScript object or value to a JSON string
+          const s = JSON.stringify(result); 
+          
+          //XMLHttpResponse(method/URL) is an AJAX object. It is used in sending data to the webserver.
           const request =  new XMLHttpRequest()
-
-          //request.open('POST',`ProcessUserInfo/${JSON.stringify(result)}`)
           request.open('POST',`ProcessUserInfo/${s}`)
           request.send()
-            }
+        }
 
     </script>
-   
     </head>
     </body>
     </html>
-<!--
-    getElementByID is a method that returns the values whose id matches the string given in the method. And though we are not passing any value to the JavaScript function, it gets the value.
-    XMLHttpResponse(method/URL) is an AJAX object. It is used in sending data to the webserver. Create an XMLHttpResponse object and pass your value through it.
-    JSON.stringfy is a common JSON method. When passing data to a web server data has to string, and the .stringfy method helps us do that.
--->
