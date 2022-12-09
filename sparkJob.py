@@ -1,3 +1,5 @@
+import findspark
+findspark.init()
 from pyspark.context import SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql import Row
@@ -18,15 +20,18 @@ from flask import Flask,render_template, request
 import json
 import subprocess
 
+#initializing flask application
 app  = Flask(__name__)
 
+#route to load recommendations homepage
 @app.route('/')
 def ui():
     return render_template('UI.html')
 
-
+#route to receive data from frontend and process it in spark 
 @app.route('/ProcessUserInfo/<string:userinfo>',methods = ['POST','GET'])
 def getValue(userinfo):
+    #userinfo - data received from frontend
     userinfo = json.loads(userinfo)
     print(userinfo) 
     
@@ -39,28 +44,18 @@ def getValue(userinfo):
     spark.sparkContext.setLogLevel('WARN')
 
     
-    print(spark.version)
+    print(spark.version) #3.3.1
     global result
     #------------------------------user input-------------------------------
 
     heartInfo,speedInfo,genderInfo = userinfo['avgHrate'], userinfo['avgSpeed'], userinfo['selectedGender']
-    
-    '''
-    heartInfo = [130,131,134,135,136,132,130,138,130,138]
-    speedInfo = [20,20,21,24,23,25,26,21,23,21]
-    genderInfo = "male"
-    '''
-    '''heartInfo = [110,111,124,115,116,112,110,118,110,118] 
-    speedInfo = [25,26,23,24,23,27,26,25,23,23]  
-    genderInfo = "male"'''
-
-    
-    #step 1 - create dF for given input
+        
+    #step 1 - create dF for input received
     userInputdf = spark.createDataFrame([(heartInfo,speedInfo,genderInfo)],["heartInfo","speedInfo","genderInfo"])
     print("------------------------User input received--------------------------")
     userInputdf.show()
     
-    #step 2 - find range for given avg 
+    #step 2 - find minimum and maximum range for given avg 
     userInputdf=userInputdf.withColumn("heart_rate_min", userInputdf.heartInfo/10)
     userInputdf=userInputdf.withColumn("heart_rate_min", userInputdf.heart_rate_min.cast('int'))
     userInputdf=userInputdf.withColumn("heart_rate_min", userInputdf.heart_rate_min*10)
@@ -80,7 +75,7 @@ def getValue(userinfo):
     speed_min = userInputdf.select("speed_min").collect()[0].asDict()["speed_min"] 
     speed_max = userInputdf.select("speed_max").collect()[0].asDict()["speed_max"] 
     
-    #step 4 - check if data available in intermediate table
+    #step 4 - check if activity recommendation data is available in intermediate mongo table
     #read data from mongodb 
     cacheData = spark.read.format('com.mongodb.spark.sql.DefaultSource')\
                         .option("uri", "mongodb://127.0.0.1/local.cacheRangeActivity")\
@@ -89,14 +84,14 @@ def getValue(userinfo):
     sqlC = SQLContext(spark)
     
     cacheData.createOrReplaceTempView("cacheData")
-    print("------------------------Read data available in Cache--------------------------")
+    print("------------------------Read data available in cacheData--------------------------")
     cacheData.show()
 
     query = "SELECT sport from cacheData where minHeart = {} and maxHeart = {}  and minSpeed = {} and maxSpeed = {} and gender = '{}'"\
           .format(heart_rate_min,heart_rate_max,speed_min,speed_max,genderInfo)
         
     cacheResult = sqlC.sql(query)
-    print("------------------------Query output to check if data available in cache------------ ")
+    print("------------------------Query output to check if data available in cacheResult------------ ")
 
     cacheResult.show()
 
@@ -106,14 +101,13 @@ def getValue(userinfo):
       cacheResult.show()
       final_data = cacheResult.select('sport').distinct().collect()
       
-      
       result = ""
       for row in final_data:
         result = row['sport']+","+result
       result = result.strip(",")
       return result
     else:
-      #no data available in cache - find in base table
+      #no data available in intermediate mongo tables - find in base mongo table
       print("------------------------Requested activity not avaialable--------------------------\n")
       print("------------------------Proceeding to check Base mongo tables----------------------")
 
@@ -179,7 +173,7 @@ def getValue(userinfo):
         df = spark.createDataFrame([(speed_min,speed_max,heart_rate_min,heart_rate_max,genderInfo,result)],
                                   ["minSpeed","maxSpeed","minHeart","maxHeart","gender","sport"])
 
-        print("------------------------Data stored in Cache table for future reference-----------------------")
+        print("------------------------Data stored in Intermediate mongo collections for future reference-----------------------")
 
         df.show()
         df.write\
@@ -189,14 +183,14 @@ def getValue(userinfo):
           .save()
         
       
-      
       return result
 
+#route to return activity recommendations to the frontend
 @app.route('/result')
 def output():
     return render_template('result.html', data=result)
 
-
+#run flask job
 if __name__=="__main__":
     app.run(debug=True)
     
