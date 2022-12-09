@@ -1,0 +1,397 @@
+[{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b0"
+  },
+  "gender": "male",
+  "heart_rate_min": 120,
+  "heart_rate_max": 130,
+  "sport": "bike",
+  "sportCount": 56
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b1"
+  },
+  "gender": "female",
+  "heart_rate_min": 140,
+  "heart_rate_max": 150,
+  "sport": "run",
+  "sportCount": 14
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b2"
+  },
+  "gender": "female",
+  "heart_rate_min": 160,
+  "heart_rate_max": 170,
+  "sport": "run",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b3"
+  },
+  "gender": "male",
+  "heart_rate_min": 120,
+  "heart_rate_max": 130,
+  "sport": "run",
+  "sportCount": 24
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b4"
+  },
+  "gender": "male",
+  "heart_rate_min": 110,
+  "heart_rate_max": 120,
+  "sport": "bike (transport)",
+  "sportCount": 24
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b5"
+  },
+  "gender": "female",
+  "heart_rate_min": 130,
+  "heart_rate_max": 140,
+  "sport": "rowing",
+  "sportCount": 8
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b6"
+  },
+  "gender": "female",
+  "heart_rate_min": 150,
+  "heart_rate_max": 160,
+  "sport": "orienteering",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b7"
+  },
+  "gender": "female",
+  "heart_rate_min": 120,
+  "heart_rate_max": 130,
+  "sport": "rowing",
+  "sportCount": 4
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b8"
+  },
+  "gender": "female",
+  "heart_rate_min": 120,
+  "heart_rate_max": 130,
+  "sport": "bike",
+  "sportCount": 7
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5b9"
+  },
+  "gender": "female",
+  "heart_rate_min": 150,
+  "heart_rate_max": 160,
+  "sport": "rowing",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5ba"
+  },
+  "gender": "female",
+  "heart_rate_min": 120,
+  "heart_rate_max": 130,
+  "sport": "bike (transport)",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5bb"
+  },
+  "gender": "male",
+  "heart_rate_min": 110,
+  "heart_rate_max": 120,
+  "sport": "bike",
+  "sportCount": 66
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5bc"
+  },
+  "gender": "male",
+  "heart_rate_min": 150,
+  "heart_rate_max": 160,
+  "sport": "run",
+  "sportCount": 20
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5bd"
+  },
+  "gender": "male",
+  "heart_rate_min": 140,
+  "heart_rate_max": 150,
+  "sport": "run",
+  "sportCount": 32
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5be"
+  },
+  "gender": "female",
+  "heart_rate_min": 120,
+  "heart_rate_max": 130,
+  "sport": "run",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5bf"
+  },
+  "gender": "female",
+  "heart_rate_min": 100,
+  "heart_rate_max": 110,
+  "sport": "run",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c0"
+  },
+  "gender": "male",
+  "heart_rate_min": 160,
+  "heart_rate_max": 170,
+  "sport": "run",
+  "sportCount": 3
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c1"
+  },
+  "gender": "female",
+  "heart_rate_min": 140,
+  "heart_rate_max": 150,
+  "sport": "rowing",
+  "sportCount": 14
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c2"
+  },
+  "gender": "male",
+  "heart_rate_min": 110,
+  "heart_rate_max": 120,
+  "sport": "run",
+  "sportCount": 3
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c3"
+  },
+  "gender": "male",
+  "heart_rate_min": 160,
+  "heart_rate_max": 170,
+  "sport": "bike (transport)",
+  "sportCount": 2
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c4"
+  },
+  "gender": "male",
+  "heart_rate_min": 130,
+  "heart_rate_max": 140,
+  "sport": "bike",
+  "sportCount": 33
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c5"
+  },
+  "gender": "male",
+  "heart_rate_min": 100,
+  "heart_rate_max": 110,
+  "sport": "bike (transport)",
+  "sportCount": 16
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c6"
+  },
+  "gender": "male",
+  "heart_rate_min": 130,
+  "heart_rate_max": 140,
+  "sport": "run",
+  "sportCount": 51
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c7"
+  },
+  "gender": "female",
+  "heart_rate_min": 110,
+  "heart_rate_max": 120,
+  "sport": "hiking",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c8"
+  },
+  "gender": "male",
+  "heart_rate_min": 140,
+  "heart_rate_max": 150,
+  "sport": "bike",
+  "sportCount": 16
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5c9"
+  },
+  "gender": "male",
+  "heart_rate_min": 90,
+  "heart_rate_max": 100,
+  "sport": "bike",
+  "sportCount": 5
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5ca"
+  },
+  "gender": "male",
+  "heart_rate_min": 150,
+  "heart_rate_max": 160,
+  "sport": "bike",
+  "sportCount": 4
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5cb"
+  },
+  "gender": "female",
+  "heart_rate_min": 110,
+  "heart_rate_max": 120,
+  "sport": "bike (transport)",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5cc"
+  },
+  "gender": "male",
+  "heart_rate_min": 90,
+  "heart_rate_max": 100,
+  "sport": "bike (transport)",
+  "sportCount": 7
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5cd"
+  },
+  "gender": "female",
+  "heart_rate_min": 110,
+  "heart_rate_max": 120,
+  "sport": "bike",
+  "sportCount": 6
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5ce"
+  },
+  "gender": "female",
+  "heart_rate_min": 160,
+  "heart_rate_max": 170,
+  "sport": "rowing",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5cf"
+  },
+  "gender": "female",
+  "heart_rate_min": 130,
+  "heart_rate_max": 140,
+  "sport": "run",
+  "sportCount": 10
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d0"
+  },
+  "gender": "male",
+  "heart_rate_min": 100,
+  "heart_rate_max": 110,
+  "sport": "mountain bike",
+  "sportCount": 3
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d1"
+  },
+  "gender": "female",
+  "heart_rate_min": 80,
+  "heart_rate_max": 90,
+  "sport": "run",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d2"
+  },
+  "gender": "male",
+  "heart_rate_min": 140,
+  "heart_rate_max": 150,
+  "sport": "bike (transport)",
+  "sportCount": 3
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d3"
+  },
+  "gender": "female",
+  "heart_rate_min": 90,
+  "heart_rate_max": 100,
+  "sport": "bike",
+  "sportCount": 4
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d4"
+  },
+  "gender": "male",
+  "heart_rate_min": 120,
+  "heart_rate_max": 130,
+  "sport": "bike (transport)",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d5"
+  },
+  "gender": "male",
+  "heart_rate_min": 170,
+  "heart_rate_max": 180,
+  "sport": "run",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d6"
+  },
+  "gender": "female",
+  "heart_rate_min": 150,
+  "heart_rate_max": 160,
+  "sport": "run",
+  "sportCount": 7
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d7"
+  },
+  "gender": "male",
+  "heart_rate_min": 110,
+  "heart_rate_max": 120,
+  "sport": "mountain bike",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d8"
+  },
+  "gender": "female",
+  "heart_rate_min": 110,
+  "heart_rate_max": 120,
+  "sport": "rowing",
+  "sportCount": 1
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5d9"
+  },
+  "gender": "male",
+  "heart_rate_min": 100,
+  "heart_rate_max": 110,
+  "sport": "bike",
+  "sportCount": 36
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5da"
+  },
+  "gender": "female",
+  "heart_rate_min": 100,
+  "heart_rate_max": 110,
+  "sport": "bike",
+  "sportCount": 5
+},{
+  "_id": {
+    "$oid": "6372fb801c749e22bba6f5db"
+  },
+  "gender": "male",
+  "heart_rate_min": 100,
+  "heart_rate_max": 110,
+  "sport": "run",
+  "sportCount": 3
+}]

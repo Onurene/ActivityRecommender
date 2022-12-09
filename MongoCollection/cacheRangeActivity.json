@@ -1,0 +1,71 @@
+[{
+  "_id": {
+    "$oid": "6373084533d1d0106d3ce73b"
+  },
+  "minSpeed": 20,
+  "maxSpeed": 30,
+  "minHeart": 100,
+  "maxHeart": 110,
+  "gender": "male",
+  "sport": "bike,cycle"
+},{
+  "_id": {
+    "$oid": "6373084533d1d0106d3ce73c"
+  },
+  "minSpeed": 20,
+  "maxSpeed": 30,
+  "minHeart": 120,
+  "maxHeart": 130,
+  "gender": "female",
+  "sport": "swimming,bike"
+},{
+  "_id": {
+    "$oid": "637456078df308671612012a"
+  },
+  "minSpeed": 20,
+  "maxSpeed": 30,
+  "minHeart": 130,
+  "maxHeart": 140,
+  "gender": "female",
+  "sport": "bike,run,rowing"
+},{
+  "_id": {
+    "$oid": "63745690ba2cd75d226b04ee"
+  },
+  "minSpeed": 20,
+  "maxSpeed": 30,
+  "minHeart": 130,
+  "maxHeart": 140,
+  "gender": "male",
+  "sport": "bike (transport),bike,run"
+},{
+  "_id": {
+    "$oid": "638e3596106a6d62e57e2f6b"
+  },
+  "minSpeed": 10,
+  "maxSpeed": 20,
+  "minHeart": 10,
+  "maxHeart": 20,
+  "gender": "female",
+  "sport": "run,rowing"
+},{
+  "_id": {
+    "$oid": "638e64fba074e762638599c0"
+  },
+  "minSpeed": 10,
+  "maxSpeed": 20,
+  "minHeart": 10,
+  "maxHeart": 20,
+  "gender": "male",
+  "sport": "bike,bike (transport)"
+},{
+  "_id": {
+    "$oid": "638ec7b6d29c2602ebae0bed"
+  },
+  "minSpeed": 0,
+  "maxSpeed": 10,
+  "minHeart": 160,
+  "maxHeart": 170,
+  "gender": "female",
+  "sport": "bike,bike (transport),orienteering,hiking,run,rowing"
+}]
